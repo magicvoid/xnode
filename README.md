@@ -2,6 +2,7 @@
 一个基于Nodejs的快速开发框架
 
 集成了：
+
 * nodejs
 * express(4)
 * mongodb(mongoskin)
@@ -27,25 +28,31 @@ node server.js
 
 ## 约定
 1. 接口
-应用代码应写在`app/api`里，每一个文件即代表一个模块，将提供以文件名作为path的接口
-```nodejs
-//例如:example.js里的如下代码
+
+ 应用代码应写在`app/api`里，每一个文件即代表一个模块，将提供以文件名作为path的接口，例如:example.js里的如下代码
+
+ ```
 router.get(‘/ping’,function(req,res){
 	res.send('pong')
 })
 //将提供接口：http://yourdomain:port/example/ping，返回字符串pong
 ```
+
 2. 数据
-使用`var Task = require(‘db’).collection(‘Task’)`来获得Task数据集，然后可以用native的方式操作mongodb
-```nodejs
+
+ 使用`var Task = require(‘db’).collection(‘Task’)`来获得Task数据集，然后可以用native的方式操作mongodb
+
+ ```
 //例如：查询一个Task数据
 Task.findOne({title:'onlyonetaskstitleisthisone'},function(err,task){
 	//do something
 })
 ```
+
 3. 权限
-在config/default.yml中配置校验规则，然后通过User的roles字段来鉴权
-```nodejs
+ 在config/default.yml中配置校验规则，然后通过User的roles字段来鉴权
+ 
+ ```
 //例如，在default.yml中配置：
 passport:
 	rules:
@@ -59,23 +66,29 @@ passport:
 //用户访问/task/example.html需要user角色
 //用户访问/admin/api/下的所有请求都需要admin角色
 ```
-权限不足时，用户会得到`403`响应。未登录，则是`401`。
+ 权限不足时，用户会得到`403`响应。未登录，则是`401`。
+
 4. 登陆
-*POST*：
-```nodejs
+
+ **POST**
+
+ ```nodejs
 /login
 body:{
 	username:xxx,
 	password:xxx
 }
 ```
-*GET*
-```nodejs
+ **GET**
+ 
+ ```
 /login?username=xxx&password=xxx
 ```
 5. 退出
-*GET*
-```nodejs
+
+ **GET**
+
+ ```
 /logout
 ```
 默认配置的session有效期为一周
