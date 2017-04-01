@@ -29,9 +29,10 @@ node server.js
 ## 约定
 1. 接口
 
- 应用代码应写在`app/api`里，每一个文件即代表一个模块，将提供以文件名作为path的接口，例如:example.js里的如下代码
+ 应用代码应写在`app/api`里，每一个文件即代表一个模块，将提供以文件名作为path的接口
 
- ```
+ ```javascript
+//例如:example.js里的如下代码
 router.get(‘/ping’,function(req,res){
 	res.send('pong')
 })
@@ -42,7 +43,7 @@ router.get(‘/ping’,function(req,res){
 
  使用`var Task = require(‘db’).collection(‘Task’)`来获得Task数据集，然后可以用native的方式操作mongodb
 
- ```
+ ```javascript
 //例如：查询一个Task数据
 Task.findOne({title:'onlyonetaskstitleisthisone'},function(err,task){
 	//do something
@@ -50,9 +51,9 @@ Task.findOne({title:'onlyonetaskstitleisthisone'},function(err,task){
 ```
 
 3. 权限
- 在config/default.yml中配置校验规则，然后通过User的roles字段来鉴权
+ 在`config/default.yml`中配置校验规则，然后通过User的roles字段来鉴权
  
- ```
+ ```javascript
 //例如，在default.yml中配置：
 passport:
 	rules:
@@ -72,7 +73,7 @@ passport:
 
  **POST**
 
- ```nodejs
+ ```javascript
 /login
 body:{
 	username:xxx,
@@ -81,14 +82,14 @@ body:{
 ```
  **GET**
  
- ```
+ ```javascript
 /login?username=xxx&password=xxx
 ```
 5. 退出
 
  **GET**
 
- ```
+ ```javascript
 /logout
 ```
 默认配置的session有效期为一周
